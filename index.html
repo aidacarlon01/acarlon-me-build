@@ -77,37 +77,19 @@ footer{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;m
 <div class="slide">
   <header>
     <div class="brand"><i></i>acarlon.me · portfolio build</div>
-    <div class="tabs" role="tablist" aria-label="Build process">
-      <button role="tab" id="t0" aria-selected="true" aria-controls="p0">1 · Research &amp; guides</button>
-      <button role="tab" id="t1" aria-selected="false" aria-controls="p1">2 · Structure</button>
-      <button role="tab" id="t2" aria-selected="false" aria-controls="p2">3 · Workflow</button>
-      <button role="tab" id="t3" aria-selected="false" aria-controls="p3">4 · The site</button>
+    <div class="tabs" role="tablist" aria-label="Build story">
+      <button role="tab" id="t3" aria-selected="true" aria-controls="p3">1 · The site</button>
+      <button role="tab" id="t2" aria-selected="false" aria-controls="p2">2 · Workflow</button>
+      <button role="tab" id="t1" aria-selected="false" aria-controls="p1">3 · Structure</button>
+      <button role="tab" id="t0" aria-selected="false" aria-controls="p0">4 · Research &amp; guides</button>
     </div>
   </header>
   <div class="stage">
-    <div class="panel tools" id="p0" role="tabpanel" aria-labelledby="t0">
-      <div class="kv">
-        <h4>From research to guidelines</h4>
-        <ul>
-          <li><b>Portfolio best practice</b> researched in a Claude Project: how to present capabilities, projects and evidence.</li>
-          <li><b>Brand style guide</b>: palette, type, imagery, tone.</li>
-          <li><b>UX guidelines</b>: navigation, card patterns, responsive rules, image zoom on small screens.</li>
-          <li><b>Writing guide</b>: project labels, case-study structure (overview · challenge · approach · impact).</li>
-          <li><b>Copy and feedback</b> live in a ClickUp space the Project connects to.</li>
-        </ul>
-      </div>
-      <div class="col"><div class="frame"><img src="assets/clickup-styleguide.png" alt="ClickUp Portfolio Website space: The Process, Guides and Research, The Copy, and the acarlon.me style guide open"></div><div class="lab"><b>ClickUp space.</b> Process, guides and research, copy, bug tickets, all in one place.</div></div>
+<div class="panel hero" id="p3" role="tabpanel" aria-labelledby="t3">
+      <div class="col"><div class="frame fill"><img src="assets/site-home.png" style="object-position:top" alt="acarlon.me home page on desktop"></div><div class="lab"><b>acarlon.me.</b> Static HTML, CSS and vanilla JS; responsive across desktop, tablet and mobile.</div></div>
+      <div class="col"><div class="frame fill"><img src="assets/mockup-devices.png" alt="The home page on a tablet and a phone"></div><div class="lab"><b>Tablet and phone.</b> Same content, adapted layout.</div></div>
     </div>
-
-    <div class="panel site" id="p1" role="tabpanel" aria-labelledby="t1" hidden>
-      <div class="col"><div class="frame"><img src="assets/diagram-before-now.png" alt="Before: Google Sites held design, copy, visuals, build and hosting. Now: Claude for guides and copy, Gemini for infographics, Claude Code builds the static site, GitHub, Netlify, Cloudflare, live at acarlon.me"></div><div class="lab"><b>Before and now.</b> One platform replaced by the right tool for each job.</div></div>
-      <div class="col" style="grid-template-rows:1fr auto"><div class="stack2" style="grid-template-rows:auto 1fr">
-        <div class="frame"><img src="assets/site-portfolio-top.png" alt="Portfolio page header with capability filters"></div>
-        <div class="frame"><img src="assets/site-cards.png" alt="Project card grid"></div>
-      </div><div class="lab"><b>Four pages, twelve case studies.</b> Filter by capability; each card opens a case study.</div></div>
-    </div>
-
-    <div class="panel loop" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+<div class="panel loop" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
       <div class="col"><div class="frame"><img src="assets/diagram-qa-loop.png" alt="AI-assisted QA and feedback loop: capture in ClickUp, brief in a Claude Project, human review, Claude Code builds and pushes to GitHub, Netlify deploys, check live and close the ticket"></div><div class="lab"><b>The maintenance loop.</b> Spot it, log it, brief it, ship it. No manual file handling.</div></div>
       <div class="kv">
         <h4>AI for defined tasks</h4>
@@ -121,12 +103,30 @@ footer{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;m
         </ul>
       </div>
     </div>
-
-    <div class="panel hero" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
-      <div class="col"><div class="frame fill"><img src="assets/site-home.png" style="object-position:top" alt="acarlon.me home page on desktop"></div><div class="lab"><b>acarlon.me.</b> Static HTML, CSS and vanilla JS; responsive across desktop, tablet and mobile.</div></div>
-      <div class="col"><div class="frame fill"><img src="assets/mockup-devices.png" alt="The home page on a tablet and a phone"></div><div class="lab"><b>Tablet and phone.</b> Same content, adapted layout.</div></div>
+<div class="panel site" id="p1" role="tabpanel" aria-labelledby="t1" hidden>
+      <div class="col"><div class="frame"><img src="assets/diagram-before-now.png" alt="Before: Google Sites held design, copy, visuals, build and hosting. Now: Claude for guides and copy, Gemini for infographics, Claude Code builds the static site, GitHub, Netlify, Cloudflare, live at acarlon.me"></div><div class="lab"><b>Before and now.</b> One platform replaced by the right tool for each job.</div></div>
+      <div class="col" style="grid-template-rows:1fr auto"><div class="stack2" style="grid-template-rows:auto 1fr">
+        <div class="frame"><img src="assets/site-portfolio-top.png" alt="Portfolio page header with capability filters"></div>
+        <div class="frame"><img src="assets/site-cards.png" alt="Project card grid"></div>
+      </div><div class="lab"><b>Four pages, twelve case studies.</b> Filter by capability; each card opens a case study.</div></div>
     </div>
-  </div>
+<div class="panel tools" id="p0" role="tabpanel" aria-labelledby="t0" hidden>
+      <div class="kv">
+        <h4>From research to guidelines</h4>
+        <ul>
+          <li><b>Portfolio best practice</b> researched in a Claude Project: how to present capabilities, projects and evidence.</li>
+          <li><b>Brand style guide</b>: palette, type, imagery, tone.</li>
+          <li><b>UX guidelines</b>: navigation, card patterns, responsive rules, image zoom on small screens.</li>
+          <li><b>Writing guide</b>: project labels, case-study structure (overview · challenge · approach · impact).</li>
+          <li><b>Copy and feedback</b> live in a ClickUp space the Project connects to.</li>
+        </ul>
+      </div>
+      <div class="col"><div class="frame"><img src="assets/clickup-styleguide.png" alt="ClickUp Portfolio Website space: The Process, Guides and Research, The Copy, and the acarlon.me style guide open"></div><div class="lab"><b>ClickUp space.</b> Process, guides and research, copy, bug tickets, all in one place.</div></div>
+    </div>
+    
+    
+    
+      </div>
   <footer><p class="cap" id="cap"></p><span class="foot">Design &amp; build · Aida Carlon · 2026</span></footer>
 </div>
 <script>
@@ -141,7 +141,7 @@ footer{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;m
   function slug(t){return t.textContent.toLowerCase().replace(/^\d+\s*·\s*/,'').replace(/[^a-z]+/g,'-').replace(/^-|-$/g,'');}
   function show(id){tabs.forEach(function(t){t.setAttribute('aria-selected',String(t.id===id));});panels.forEach(function(p){p.hidden=(p.getAttribute('aria-labelledby')!==id);});cap.innerHTML=caps[id];try{location.hash=slug(document.getElementById(id));}catch(e){}}
   tabs.forEach(function(t){t.addEventListener('click',function(){show(t.id);});});
-  var h=(location.hash||'').replace('#',''),start='t0';tabs.forEach(function(t){if(slug(t)===h)start=t.id;});show(start);
+  var h=(location.hash||'').replace('#',''),start='t3';tabs.forEach(function(t){if(slug(t)===h)start=t.id;});show(start);
 })();
 </script>
 </body>
