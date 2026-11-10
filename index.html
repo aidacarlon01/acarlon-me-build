@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>acarlon.me Build</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one 16:9 slide. Tab bar on top, one stage per tab; most stages are a before/after pair (design artefact → learner-facing result). WIPO blue and lime from the course's own palette. */
+:root{--bg:#0f2a4a;--bg2:#163a66;--fg:#f4f7fb;--muted:#a9bddc;--tab:#1f4a7a;--tab-on:#5fd3e6;--tab-on-fg:#0f2a4a;--stage:#122f55;--line:rgba(255,255,255,.14);--card:#fff;--font:"Noto Sans","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px}
+.slide{position:relative;width:100%;aspect-ratio:16/9;display:grid;grid-template-rows:auto 1fr auto;gap:8px;padding:12px max(12px,env(safe-area-inset-right,0px)) 12px max(12px,env(safe-area-inset-left,0px));overflow:hidden;background:radial-gradient(900px 600px at 70% 30%,var(--bg2),var(--bg) 70%)}
+header{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.02em;font-size:.95rem;margin-right:auto;white-space:nowrap}
+.brand i{width:12px;height:12px;border-radius:50%;background:var(--tab-on);display:inline-block}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}
+.tabs button{font:inherit;font-weight:600;font-size:.8rem;border:0;background:var(--tab);color:var(--fg);padding:6px 11px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{background:var(--tab-on);color:var(--tab-on-fg)}
+.tabs button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.stage{position:relative;min-height:0;background:var(--stage);border:1px solid var(--line);border-radius:12px;overflow:hidden;padding:14px}
+.panel{position:absolute;inset:14px;display:grid;gap:14px;min-height:0}
+.panel[hidden]{display:none}
+.two{grid-template-columns:1fr 1fr}
+.three{grid-template-columns:1fr 1fr 1fr}
+.four{grid-template-columns:1fr 1fr 1fr 1fr}
+.design{grid-template-columns:1.1fr 1fr 1fr}
+.design .tables{display:grid;grid-template-rows:1fr 1fr;gap:10px;min-height:0}
+.hero{grid-template-columns:1.6fr 1fr}
+.media{grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr}
+.frame.fill img{width:100%;height:100%;object-fit:cover}
+.align.small{font-size:.74rem;padding:10px 12px}
+.align.small th,.align.small td{padding:5px 6px}
+.wide-right{grid-template-columns:1fr 1.4fr}
+.col{min-height:0;display:grid;grid-template-rows:1fr auto;gap:6px}
+.frame{min-height:0;background:var(--card);border-radius:10px;overflow:hidden;display:grid;place-items:center;box-shadow:0 20px 40px -24px rgba(0,0,0,.8)}
+.frame img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
+.frame.top img{align-self:start;object-position:top;height:100%;width:100%;object-fit:cover}
+.lab{font-size:.78rem;color:var(--muted);line-height:1.3;min-height:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lab b{color:var(--fg);font-weight:600}
+.arrow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:var(--tab-on);color:var(--tab-on-fg);display:grid;place-items:center;font-weight:700;font-size:18px;z-index:2;box-shadow:0 8px 20px -8px rgba(0,0,0,.8)}
+.placeholder{background:repeating-linear-gradient(45deg,#1d4a8f 0 10px,#1a4383 10px 20px);color:var(--fg);display:grid;place-items:center;text-align:center;padding:20px;font-size:.9rem;line-height:1.4;border:1px dashed var(--line);border-radius:10px}
+.placeholder b{display:block;font-size:1rem;margin-bottom:6px}
+/* alignment table */
+.align{min-height:0;overflow:auto;background:var(--card);color:#14233b;border-radius:10px;padding:14px 16px;font-size:.8rem;line-height:1.35}
+.align h4{margin:0 0 8px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:#1f4a7a}
+.align table{border-collapse:collapse;width:100%}
+.align th,.align td{text-align:left;vertical-align:top;padding:7px 8px;border-top:1px solid #e4e9f2}
+.align th{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#5b6b85;border-top:0}
+.lvl{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.06em;padding:2px 7px;border-radius:999px;color:#fff;background:#1f4a7a}
+.lvl.c{background:#a7c21a;color:#0b2a5b}.lvl.e{background:#0d7a8f}.lvl.a{background:#4a66c2}
+footer{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;min-height:22px}
+.cap{font-size:.86rem;color:var(--muted);margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cap b{color:var(--fg);font-weight:600}
+.foot{font-size:.74rem;color:var(--muted);white-space:nowrap}
+@media (max-width:640px){
+  .slide{aspect-ratio:auto;min-height:100%}
+  .stage{min-height:70vh}
+  .two,.three,.four,.wide-right,.design,.hero,.media{grid-template-columns:1fr;grid-template-rows:none}
+  .tabs button{font-size:.74rem;padding:5px 9px}
+  .cap{white-space:normal;font-size:.8rem}
+  .arrow{display:none}
+}
+</style>
+
+<style>.kv{min-height:0;overflow:auto;display:flex;flex-direction:column;justify-content:center;background:var(--card);color:#14233b;border-radius:10px;padding:14px 16px;font-size:.82rem;line-height:1.4}
+.kv h4{margin:0 0 8px;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:#1f4a7a}
+.kv ul{margin:0;padding-left:1.1em}.kv li{margin-bottom:9px;font-size:.9rem}.kv b{color:#0f2a4a}
+.site{grid-template-columns:1fr 1fr}
+.stack2{display:grid;grid-template-rows:1fr 1fr;gap:10px;min-height:0}
+.phones .frame{aspect-ratio:auto}.tools{grid-template-columns:1fr 1.7fr}.loop{grid-template-columns:1.6fr 1fr}
+.phones{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-height:0}
+@media (max-width:640px){.site,.tools,.loop,.phones{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<div class="slide">
+  <header>
+    <div class="brand"><i></i>acarlon.me · portfolio build</div>
+    <div class="tabs" role="tablist" aria-label="Build process">
+      <button role="tab" id="t0" aria-selected="true" aria-controls="p0">1 · Research &amp; guides</button>
+      <button role="tab" id="t1" aria-selected="false" aria-controls="p1">2 · Structure</button>
+      <button role="tab" id="t2" aria-selected="false" aria-controls="p2">3 · Workflow</button>
+      <button role="tab" id="t3" aria-selected="false" aria-controls="p3">4 · The site</button>
+    </div>
+  </header>
+  <div class="stage">
+    <div class="panel tools" id="p0" role="tabpanel" aria-labelledby="t0">
+      <div class="kv">
+        <h4>From research to guidelines</h4>
+        <ul>
+          <li><b>Portfolio best practice</b> researched in a Claude Project: how to present capabilities, projects and evidence.</li>
+          <li><b>Brand style guide</b>: palette, type, imagery, tone.</li>
+          <li><b>UX guidelines</b>: navigation, card patterns, responsive rules, image zoom on small screens.</li>
+          <li><b>Writing guide</b>: project labels, case-study structure (overview · challenge · approach · impact).</li>
+          <li><b>Copy and feedback</b> live in a ClickUp space the Project connects to.</li>
+        </ul>
+      </div>
+      <div class="col"><div class="frame"><img src="assets/clickup-styleguide.png" alt="ClickUp Portfolio Website space: The Process, Guides and Research, The Copy, and the acarlon.me style guide open"></div><div class="lab"><b>ClickUp space.</b> Process, guides and research, copy, bug tickets, all in one place.</div></div>
+    </div>
+
+    <div class="panel site" id="p1" role="tabpanel" aria-labelledby="t1" hidden>
+      <div class="col"><div class="frame"><img src="assets/diagram-before-now.png" alt="Before: Google Sites held design, copy, visuals, build and hosting. Now: Claude for guides and copy, Gemini for infographics, Claude Code builds the static site, GitHub, Netlify, Cloudflare, live at acarlon.me"></div><div class="lab"><b>Before and now.</b> One platform replaced by the right tool for each job.</div></div>
+      <div class="col" style="grid-template-rows:1fr auto"><div class="stack2" style="grid-template-rows:auto 1fr">
+        <div class="frame"><img src="assets/site-portfolio-top.png" alt="Portfolio page header with capability filters"></div>
+        <div class="frame"><img src="assets/site-cards.png" alt="Project card grid"></div>
+      </div><div class="lab"><b>Four pages, twelve case studies.</b> Filter by capability; each card opens a case study.</div></div>
+    </div>
+
+    <div class="panel loop" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+      <div class="col"><div class="frame"><img src="assets/diagram-qa-loop.png" alt="AI-assisted QA and feedback loop: capture in ClickUp, brief in a Claude Project, human review, Claude Code builds and pushes to GitHub, Netlify deploys, check live and close the ticket"></div><div class="lab"><b>The maintenance loop.</b> Spot it, log it, brief it, ship it. No manual file handling.</div></div>
+      <div class="kv">
+        <h4>AI for defined tasks</h4>
+        <ul>
+          <li><b>Claude</b>: research, documentation, build briefs.</li>
+          <li><b>Claude Code</b>: development and updates, working in the GitHub repo.</li>
+          <li><b>Perplexity / Gemini</b>: selected visuals and copy.</li>
+          <li><b>Representative samples</b> built on GitHub where original work is under IP restrictions: slides, walkthroughs, landing pages.</li>
+          <li><b>Every output reviewed</b> so writing, design and presentation stay mine.</li>
+          <li><b>Netlify</b> deploys each push; copy and design changes follow the same route as the first build.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel hero" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+      <div class="col"><div class="frame fill"><img src="assets/site-home.png" style="object-position:top" alt="acarlon.me home page on desktop"></div><div class="lab"><b>acarlon.me.</b> Static HTML, CSS and vanilla JS; responsive across desktop, tablet and mobile.</div></div>
+      <div class="col"><div class="frame fill"><img src="assets/mockup-devices.png" alt="The home page on a tablet and a phone"></div><div class="lab"><b>Tablet and phone.</b> Same content, adapted layout.</div></div>
+    </div>
+  </div>
+  <footer><p class="cap" id="cap"></p><span class="foot">Design &amp; build · Aida Carlon · 2026</span></footer>
+</div>
+<script>
+(function(){
+  var caps={
+    t0:"<b>Guidelines before pixels.</b> Research shaped a brand guide, UX rules and a writing guide; the site followed them.",
+    t1:"<b>Four pages, twelve case studies.</b> Prototyped with placeholder copy first, then built responsive.",
+    t2:"<b>A repeatable workflow.</b> ClickUp holds copy and feedback; Claude Code changes the repo; Netlify deploys.",
+    t3:"<b>The result.</b> A portfolio I can update in minutes without rebuilding pages by hand."
+  };
+  var tabs=document.querySelectorAll('[role=tab]'),panels=document.querySelectorAll('[role=tabpanel]'),cap=document.getElementById('cap');
+  function slug(t){return t.textContent.toLowerCase().replace(/^\d+\s*·\s*/,'').replace(/[^a-z]+/g,'-').replace(/^-|-$/g,'');}
+  function show(id){tabs.forEach(function(t){t.setAttribute('aria-selected',String(t.id===id));});panels.forEach(function(p){p.hidden=(p.getAttribute('aria-labelledby')!==id);});cap.innerHTML=caps[id];try{location.hash=slug(document.getElementById(id));}catch(e){}}
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.id);});});
+  var h=(location.hash||'').replace('#',''),start='t0';tabs.forEach(function(t){if(slug(t)===h)start=t.id;});show(start);
+})();
+</script>
+</body>
+</html>
